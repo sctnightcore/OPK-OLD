@@ -1,0 +1,70 @@
+# In this file you can control which items to put in storage,
+# to sell, or to leave in the inventory.
+#
+# Syntax:
+# (item name) (minimum) (auto-store) (auto-sell) [put in cart] [get from cart]
+# item name	: Name of the item.
+# miminum	: The minimum amount of this item that you want to keep in inventory.
+# autostore	: Set to 1 to walk back to a Kapra NPC to put in storage.
+# autosell	: Set to 1 to sell item at a buy/sell NPC.
+# put in cart	: Set to 1 to automatically put this item in cart.
+# get from cart : Set to 1 to automatically get this item from cart.
+#
+# The example below will sell all jellopies, store all knifes and puts
+# all flowers in cart:
+#	Jellopy 0 0 1
+#	Knife 0 1 0
+#	Flower 0 0 0 1
+#
+# This example will get Red Potions from cart if you have less than 25
+# of them in your inventory:
+# 	Red Potion 25 0 0 0 1
+#
+# The item name isn't case sensitive. Only items found in this file will
+# be stored or sold.
+#
+# If auto-store and auto-sell are 1, Kore will do storage first (unless
+# storage is full) then sell.
+#
+# Kore will not sell or store equipped items. For example, if you're using
+# a knife and you have a line to auto-sell all knives, kore will sell any
+# extras it picks up, not the knife it's using.
+#
+# Don't forget to set the storageAuto, sellAuto and related configuration
+# options in config.txt, or this file won't have any effect.
+#
+# An auto-sell list and auto-storage list is provided by default, modify it
+# as you see fit.
+
+
+# All items not mentioned in this file will be automatically stored in storage.
+all 0 1 0
+
+
+##### HEAL/SUPPORT ITEMS #####
+# Adjust these to your needs
+
+Butterfly Wing 10 0 0
+Fly Wing 100 0 0
+
+Blue Potion 0 1 0
+Condensed Red Potion 50 1 0
+Condensed White Potion 50 1 0
+Condensed Yellow Potion 50 1 0
+Green Potion 0 1 0
+Red Potion 200 0 0
+Orange Potion 25 1 0
+White Potion 25 1 0
+Yellow potion 25 1 0
+Awakening Potion 10 0 0
+Novice Potion 600 0 0
+Novice Fly Wing 200 0 0
+Novice Butterfly Wing 30 0 0
+"Free Ticket for Kafra Storage" 50 0 0
+"Free Ticket for Kafra Transportation" 50 0 0 
+##### ARROWS #####
+# You may want to modify these if you're an archer/hunter
+
+#Arrow 3000 1 0
+
+
