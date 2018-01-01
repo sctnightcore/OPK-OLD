@@ -4,40 +4,40 @@
 # The value of each variable is reffered as "x".
 
 # Server connection timeouts
-master 17
-gamelogin 17
-charlogin 17
-maplogin 17
+master 12
+gamelogin 12
+charlogin 12
+maplogin 12
 play 40
 # When disconnected, wait x seconds before reconnecting again
-reconnect 15
+reconnect 30
 
 # Wait x seconds for a poseidon reply before disconnecting
 # Ignore this if you don't use Poseidon Server
 poseidon_wait_reply 15
 
 # Activate AI after x seconds after the map's loaded
-ai 1.5
+ai 2
 
-ai_move_retry 1
-ai_move_giveup 1
+ai_move_retry 0.25
+ai_move_giveup 1.5
 
 # Send the attack packet every x seconds, if it hasn't been send already
-ai_attack 0
+ai_attack 1
 ai_homunculus_attack 1
 
 # Check for monsters to attack every x seconds
-ai_attack_auto 0.1
+ai_attack_auto 0.5
 
 # Give up attacking a monster if it can't be reached within x seconds
-ai_attack_giveup 5
+ai_attack_giveup 12
 
 # If you've just killed a monster, and there are no aggressives,
 # and you're not picking up any items, wait x seconds before doing
 # anything else.
-ai_attack_waitAfterKill 0.1
-ai_attack_unstuck 0.1
-ai_attack_unfail 0.1
+ai_attack_waitAfterKill 0.7
+ai_attack_unstuck 2.75
+ai_attack_unfail 5
 
 # Pause for the specified number of seconds after taking something,
 # it increases the interval between taking several items and between
@@ -45,17 +45,17 @@ ai_attack_unfail 0.1
 ai_items_take_delay 1.4
 
 # When your monster died, start checking for loot after x seconds
-ai_items_take_start 0.5
+ai_items_take_start 0.4
 
 # Stop checking for loot x seconds after it has begun checking
-ai_items_take_end 0.25
+ai_items_take_end 1.2
 
 # When standing near an item, send the 'take' packet every x seconds until
 # the item has been taken.
 ai_take .4
 
 # Give up if unable to pickup item after x seconds
-ai_take_giveup 1
+ai_take_giveup 3
 ai_items_gather_giveup 3
 
 # Every x seconds, check items for gathering
@@ -71,7 +71,7 @@ ai_dealAuto 3
 ai_dealAutoCancel 5
 ai_partyAutoDeny 3
 ai_guildAutoDeny 3
-ai_dead_respawn 1
+ai_dead_respawn 4
 ai_wipe_old 200
 ai_wipe_check 30
 
@@ -92,19 +92,19 @@ ai_sit_wait 0
 # hp/sp sufficiency, do so when the specified number of seconds elapsed
 ai_safe_stand_up 2
 
-ai_skill_use 1.5
+ai_skill_use 0.75
 ai_skill_use_giveup 1
-ai_item_use_auto 1
+ai_item_use_auto 0.5
 ai_item_equip_auto 0.75
-ai_equipAuto_skilluse_giveup 2
+ai_equipAuto_skilluse_giveup 5
 ai_equip_giveup 2
 
 ai_teleport 1
-ai_teleport_away 1.5
+ai_teleport_away 3
 ai_teleport_idle 4
-ai_teleport_portal 1.5
-ai_teleport_hp 0.5
-ai_teleport_safe_force 1
+ai_teleport_portal 2
+ai_teleport_hp 3
+ai_teleport_safe_force 120
 
 ai_teleport_retry 0.5
 ai_teleport_delay 0.5
@@ -144,8 +144,3 @@ injectSync 5
 injectKeepAlive 12
 welcomeText 4
 patchserver 120
-
-macro_delay 0.5
-
-ai_teleport_search 15
-

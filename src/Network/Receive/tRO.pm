@@ -19,8 +19,7 @@ sub new {
 	my ($class) = @_;
 	my $self = $class->SUPER::new(@_);
 	my %packets = (
-#		'0069' => ['account_server_info', 'x2 a4 a4 a4 x30 C1 x4 a*', [qw(sessionID accountID sessionID2 accountSex serverInfo)]],
-		'0276' => ['account_server_info', 'x2 a4 a4 a4 x30 C1 x4 a*', [qw(sessionID accountID sessionID2 accountSex serverInfo)]],
+		'0069' => ['account_server_info', 'x2 a4 a4 a4 x30 C1 x4 a*', [qw(sessionID accountID sessionID2 accountSex serverInfo)]],
 		'0078' => ['actor_exists', 'C a4 v14 a4 a2 v2 C2 a3 C3 v', [qw(object_type ID walk_speed opt1 opt2 option type hair_style weapon lowhead shield tophead midhead hair_color clothes_color head_dir guildID emblemID manner opt3 stance sex coords unknown1 unknown2 act lv)]], # 55 # standing
 		'007C' => ['actor_connected', 'C a4 v14 C2 a3 C2', [qw(object_type ID walk_speed opt1 opt2 option hair_style weapon lowhead type shield tophead midhead hair_color clothes_color head_dir stance sex coords unknown1 unknown2)]], # 42 # spawning
 		'0097' => ['private_message', 'v Z24 V Z*', [qw(len privMsgUser flag privMsg)]], # -1
@@ -112,22 +111,14 @@ sub new {
 		'093E' => ['sync_request_ex'],
 		'093F' => ['sync_request_ex'],
 	);
+
 	foreach my $switch (keys %packets) {
 		$self->{packet_list}{$switch} = $packets{$switch};
 	}
 
 	my %handlers = qw(
 		received_characters 099D
-		sync_request 0187
-		received_character_ID_and_Map 0071
-		account_id 0283		
-		actor_moved 0856
-		actor_exists 0857
-		actor_connected 0858
-		received_sync 007f
-		actor_info 0095
 	);
-
 	$self->{packet_lut}{$_} = $handlers{$_} for keys %handlers;
 	
 	$self->{sync_ex_reply} = {
@@ -216,6 +207,7 @@ sub new {
 		'093E' => '0968',
 		'093F' => '0969',
 	};
+
 	return $self;
 }
 

@@ -78,92 +78,6 @@ sub import {
 
 ### CATEGORY: Class methods
 
-##
-# void Network::Send::encrypt(r_msg, themsg)
-#
-# This is an old method used back in the iRO beta 2 days when iRO had encrypted packets.
-# At the moment (December 20 2006) there are no servers that still use encrypted packets.
-sub encrypt {
-	use bytes;
-	my $r_msg = shift;
-	my $themsg = shift;
-	my @mask;
-	my $newmsg;
-	my ($in, $out);
-	my $temp;
-	my $i;
-
-	if ($config{encrypt} == 1 && $conState >= 5) {
-		$out = 0;
-		for ($i = 0; $i < 13;$i++) {
-			$mask[$i] = 0;
-		}
-		{
-			use integer;
-			$temp = ($encryptVal * $encryptVal * 1391);
-		}
-		$temp = ~(~($temp));
-		$temp = $temp % 13;
-		$mask[$temp] = 1;
-		{
-			use integer;
-			$temp = $encryptVal * 1397;
-		}
-		$temp = ~(~($temp));
-		$temp = $temp % 13;
-		$mask[$temp] = 1;
-		for($in = 0; $in < length($themsg); $in++) {
-			if ($mask[$out % 13]) {
-				$newmsg .= pack("C1", int(rand() * 255) & 0xFF);
-				$out++;
-			}
-			$newmsg .= substr($themsg, $in, 1);
-			$out++;
-		}
-		$out += 4;
-		$newmsg = pack("v2", $out, $encryptVal) . $newmsg;
-		while ((length($newmsg) - 4) % 8 != 0) {
-			$newmsg .= pack("C1", (rand() * 255) & 0xFF);
-		}
-	} elsif ($config{encrypt} >= 2 && $conState >= 5) {
-		$out = 0;
-		for ($i = 0; $i < 17;$i++) {
-			$mask[$i] = 0;
-		}
-		{
-			use integer;
-			$temp = ($encryptVal * $encryptVal * 34953);
-		}
-		$temp = ~(~($temp));
-		$temp = $temp % 17;
-		$mask[$temp] = 1;
-		{
-			use integer;
-			$temp = $encryptVal * 2341;
-		}
-		$temp = ~(~($temp));
-		$temp = $temp % 17;
-		$mask[$temp] = 1;
-		for($in = 0; $in < length($themsg); $in++) {
-			if ($mask[$out % 17]) {
-				$newmsg .= pack("C1", int(rand() * 255) & 0xFF);
-				$out++;
-			}
-			$newmsg .= substr($themsg, $in, 1);
-			$out++;
-		}
-		$out += 4;
-		$newmsg = pack("v2", $out, $encryptVal) . $newmsg;
-		while ((length($newmsg) - 4) % 8 != 0) {
-			$newmsg .= pack("C1", (rand() * 255) & 0xFF);
-		}
-	} else {
-		$newmsg = $themsg;
-	}
-
-	$$r_msg = $newmsg;
-}
-
 ### CATEGORY: Methods
 
 ##
@@ -233,13 +147,11 @@ sub injectMessage {
 	my ($self, $message) = @_;
 	my $name = stringToBytes("|");
 	my $msg .= $name . stringToBytes(" : $message") . chr(0);
-	# encrypt(\$msg, $msg);
 
 	# Packet Prefix Encryption Support
 	#$self->encryptMessageID(\$msg);
 
 	$msg = pack("C*", 0x09, 0x01) . pack("v*", length($name) + length($message) + 12) . pack("C*",0,0,0,0) . $msg;
-	## encrypt(\$msg, $msg);
 	$self->{net}->clientSend($msg);
 }
 
@@ -251,7 +163,6 @@ sub injectAdminMessage {
 	my ($self, $message) = @_;
 	$message = stringToBytes($message);
 	$message = pack("C*",0x9A, 0x00) . pack("v*", length($message)+5) . $message .chr(0);
-	# encrypt(\$message, $message);
 
 	# Packet Prefix Encryption Support
 	#$self->encryptMessageID(\$message);
@@ -319,10 +230,8 @@ sub sendToServer {
 		return if ($args{return});
 	}
 
-	#encrypt(\$msg, $msg);
-
 	# Packet Prefix Encryption Support
-	#$self->encryptMessageID(\$msg);#++++
+	$self->encryptMessageID(\$msg);
 
 	$net->serverSend($msg);
 	$bytesSent += length($msg);
@@ -439,7 +348,7 @@ sub sendMasterLogin {
 			pack("a24", $password) .
 			pack("C*", $master_version);
 	}
-	$msg = pack("C*", #ขอให้บอทแยาวๆไม่โดนแบนนะคร๊าบ ,); #แก้ให้เป็น packet login ของตัวเอง
+
 	$self->sendToServer($msg);
 	debug "Sent sendMasterLogin\n", "sendPacket", 2;
 }
@@ -553,14 +462,7 @@ sub sendSync {
 	$self->sendToServer($self->reconstruct({switch => 'sync'}));
 	debug "Sent Sync\n", "sendPacket", 2;
 }
-sub sendSync2 {
-	my ($self, $initialSync, $msg, $args) = @_;
-	$args->{time} = getTickCount;
-	$msg = pack('C2 V', 0x60,0x03, $args->{time});
-	#$self->sendToServer($self->reconstruct({switch => 'sync'}));
-	$self->sendToServer($msg);
-	debug "Sent Sync\n", "sendPacket", 2;
-}
+
 sub parse_character_move {
 	my ($self, $args) = @_;
 	makeCoordsDir($args, $args->{coords});
@@ -1227,10 +1129,5 @@ sub sendProduceMix {
 	$self->sendToServer($msg);
 	debug "Sent Forge, Produce Item: $ID\n" , 2;
 }
-sub MySend{
-	my ($self) = @_;
-	my $msg;
-	$msg = pack('C*', 0xc9,0x08,0x7c,0x0a,0xc4,0x00,0xc0,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x34,0x0b,0x9b,0x5b,0x01,0x00,0x00,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x53,0x0f,0x8a,0xfb,0xc7,0x45,0x36,0xb9,0xa9,0x63,0xb4,0xf1,0xc4,0xcb,0x73,0x8b,0x62,0x01,0xbd,0x4f,0x2b,0xec,0xab,0x20,0x47,0xcd,0x68,0xfe,0x2e,0x06,0x6a,0x21,0x1a,0x14,0xc4,0x68,0x51,0xe1,0x88,0xbf,0xbc,0x02,0xc4,0x18,0x0c,0x7e,0x46,0x27,0xfc,0x3f,0x47,0x1e,0x44,0xf9,0xb5,0xf4,0xa9,0x2e,0x3b,0xe1,0x79,0x1d,0x42,0xf3,0x94,0x04,0x40,0x7d,0xc8,0x60,0x04,0x50,0xa8,0x27,0x95,0x5b,0xc0,0x2f,0xbc,0x61,0xfd,0xbb,0x54,0x07,0xea,0xcf,0xa4,0x0b,0xeb,0x06,0x2e,0x00,0x99,0xc5,0x19,0x2b,0xc0,0x1d,0xd8,0x1a,0x26,0xd0,0x16,0xf2,0xab,0x48,0xa6,0xc3,0xa0,0xdc,0x93,0x95,0x90,0x45,0x43,0x44,0xfa,0x22,0xd9,0x74,0x8c,0x50,0x66,0x87,0x86,0xb9,0x21,0x84,0x0e,0x0c,0x9d,0x34,0x90,0x2c,0x6d,0x1b,0x6d,0xfc,0x14,0x12,0x83,0x70,0x0b,0x76,0xbc,0x89,0x55,0xcc,0x87,0x4b,0x18,0x41,0x6f,0xa3,0x85,0xc9,0x10,0x5c,0xc5,0x23,0x78,0x0f,0x0f,0x7e,0x99,0xa4,0x00,0x42);
-	$self->sendToServer($msg);
-}
+
 1;

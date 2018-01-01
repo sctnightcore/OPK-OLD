@@ -1,17 +1,14 @@
-﻿# Please Read the Users Manual
+# Please Read the Users Manual
 # The Manual is located at http://wiki.openkore.com/index.php?title=Manual
 
 ######## Login options and server-specific options ########
 
-master Thailand - tRO (exe)
-server 3
-username a
-password a
-loginPinCode 
+master AegisRO
+server 0
+username 
+password 
+loginPinCode
 char 0
-login_packet
-##ตัวอย่าง login_packet
-#login_packet 760a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 
 # Poseidon Settings (http://wiki.openkore.com/index.php/PoseidonServer)
 # They must be the same as Query Server config in Poseidon.txt
@@ -38,8 +35,8 @@ XKore_publicIp 127.0.0.1
 XKore_ID
 
 # It is not advised to set secureAdminPassword if you're using Xkore 2
-secureAdminPassword 0
-adminPassword ceewreel
+secureAdminPassword 1
+adminPassword meecriew
 callSign
 commandPrefix ;
 callSignGM 0
@@ -60,10 +57,10 @@ message_length_max 80
 alias_heal sp 28
 
 allowedMaps
-allowedMaps_reaction 0
+allowedMaps_reaction 1
 
 attackAuto 2
-attackAuto_party 0
+attackAuto_party 1
 attackAuto_onlyWhenSafe 0
 attackAuto_followTarget 1
 attackAuto_inLockOnly 1
@@ -94,9 +91,9 @@ attackEquip_lowHead
 attackEquip_leftHand
 attackEquip_rightHand
 attackEquip_leftAccessory
-attackEquip_rightAccessory 
-attackEquip_robe Undershirt
-attackEquip_armor Pantie
+attackEquip_rightAccessory
+attackEquip_robe
+attackEquip_armor
 attackEquip_shoes
 attackEquip_arrow
 
@@ -147,7 +144,7 @@ cachePlayerNames_maxSize 100
 
 clientSight 20
 
-dcPause 0
+dcPause 1
 dcOnDeath 0
 dcOnDualLogin 0
 dcOnDisconnect 0
@@ -156,7 +153,7 @@ dcOnMaxReconnections 0
 dcOnMute 0
 dcOnPM 0
 dcOnZeny 0
-dcOnStorageFull 0
+dcOnStorageFull 1
 dcOnPlayer 0
 dcOnServerShutDown 0
 dcOnServerClose 0
@@ -177,19 +174,19 @@ followBot 0
 followRandom 0
 followRandomDistance 4
 
-itemsTakeAuto 0
+itemsTakeAuto 2
 itemsTakeAuto_party 0
-itemsGatherAuto 0
+itemsGatherAuto 2
 itemsMaxWeight 89
-itemsMaxWeight_sellOrStore 49
-itemsMaxNum_sellOrStore 89
+itemsMaxWeight_sellOrStore 48
+itemsMaxNum_sellOrStore 99
 cartMaxWeight 7900
 itemsTakeAuto_new 0
 itemsTakeGreed 0
 
-lockMap 
-lockMap_x
-lockMap_y
+lockMap pay_dun00
+lockMap_x 22
+lockMap_y 181
 lockMap_randX
 lockMap_randY
 
@@ -202,8 +199,8 @@ route_randomWalk_inTown 0
 route_randomWalk_maxRouteTime 75
 route_maxWarpFee
 route_maxNpcTries 5
-route_teleport 1
-route_teleport_minDistance 1000
+route_teleport 0
+route_teleport_minDistance 150
 route_teleport_maxTries 8
 route_teleport_notInMaps
 route_step 15
@@ -211,7 +208,7 @@ route_step 15
 runFromTarget 0
 runFromTarget_dist 6
 
-saveMap geffen
+saveMap
 saveMap_warpToBuyOrSell 1
 saveMap_warpChatCommand
 memo1
@@ -223,10 +220,10 @@ shopAuto_open 0
 shop_random 0
 shop_useSkill 1
 
-sitAuto_hp_lower 10
-sitAuto_hp_upper 10
-sitAuto_sp_lower 1
-sitAuto_sp_upper 10
+sitAuto_hp_lower 40
+sitAuto_hp_upper 100
+sitAuto_sp_lower 0
+sitAuto_sp_upper 0
 sitAuto_follow 0
 sitAuto_over_50 0
 sitAuto_idle 1
@@ -234,45 +231,41 @@ sitAuto_look
 sitAuto_look_from_wall
 sitTensionRelax 0
 
-
 statsAddAuto 0
-statsAddAuto_list 
-statsAddAuto_dontUseBonus 1
-statsAdd_over_99 1
+statsAddAuto_list
+statsAddAuto_dontUseBonus 0
+statsAdd_over_99 0
 
 skillsAddAuto 0
-skillsAddAuto_list 
+skillsAddAuto_list
 
 tankMode 0
 tankModeTarget
 
-teleport_search 1
-teleport_search_minSp 10
-
 teleportAuto_hp 10
 teleportAuto_sp 0
-teleportAuto_idle 1
-teleportAuto_portal 1
-teleportAuto_search 1
-teleportAuto_minAggressives 4
-teleportAuto_minAggressivesInLock 4
+teleportAuto_idle 0
+teleportAuto_portal 0
+teleportAuto_search 0
+teleportAuto_minAggressives 0
+teleportAuto_minAggressivesInLock 0
 teleportAuto_onlyWhenSafe 0
-teleportAuto_maxDmg 1500
-teleportAuto_maxDmgInLock 1500
+teleportAuto_maxDmg 500
+teleportAuto_maxDmgInLock 0
 teleportAuto_deadly 1
-teleportAuto_useSkill 1
+teleportAuto_useSkill 3
 teleportAuto_useChatCommand
 teleportAuto_allPlayers 0
 teleportAuto_notPlayers
 teleportAuto_atkCount 0
-teleportAuto_atkMiss 5
-teleportAuto_unstuck 1
+teleportAuto_atkMiss 10
+teleportAuto_unstuck 0
 teleportAuto_lostTarget 0
 teleportAuto_dropTarget 0
 teleportAuto_dropTargetKS 0
 teleportAuto_attackedWhenSitting 0
-teleportAuto_totalDmg 2500
-teleportAuto_totalDmgInLock 2500
+teleportAuto_totalDmg 0
+teleportAuto_totalDmgInLock 0
 teleportAuto_equip_leftAccessory
 teleportAuto_equip_rightAccessory
 teleportAuto_lostHomunculus
@@ -526,95 +519,11 @@ doCommand {
 	manualAI 0
 }
 
-#useSelf_skill Blessing {
+useSelf_skill {
 	lvl 10
 	maxCastTime 0
 	minCastTime 0
 	hp
-	sp 
-	homunculus_hp
-	homunculus_sp
-	homunculus_dead
-	onAction
-	whenStatusActive
-	whenStatusInactive Blessing
-	whenFollowing
-	spirit
-	amuletType
-	aggressives
-	monsters
-	notMonsters
-	monstersCount
-	stopWhenHit 0
-	inLockOnly 0
-	notWhileSitting 0
-	notInTown 0
-	timeout 0
-	disabled 0
-	inInventory
-	manualAI 0
-}
-#useSelf_skill Increase Agility {
-	lvl 10
-	maxCastTime 0
-	minCastTime 0
-	hp
-	sp 
-	homunculus_hp
-	homunculus_sp
-	homunculus_dead
-	onAction
-	whenStatusActive
-	whenStatusInactive Increase Agility
-	whenFollowing
-	spirit
-	amuletType
-	aggressives
-	monsters
-	notMonsters
-	monstersCount
-	stopWhenHit 0
-	inLockOnly 0
-	notWhileSitting 0
-	notInTown 0
-	timeout 0
-	disabled 0
-	inInventory
-	manualAI 0
-}
-#useSelf_skill Impositio Manus {
-	lvl 10
-	maxCastTime 0
-	minCastTime 0
-	hp
-	sp 
-	homunculus_hp
-	homunculus_sp
-	homunculus_dead
-	onAction
-	whenStatusActive
-	whenStatusInactive Impositio Manus
-	whenFollowing
-	spirit
-	amuletType
-	aggressives
-	monsters
-	notMonsters
-	monstersCount
-	stopWhenHit 0
-	inLockOnly 0
-	notWhileSitting 0
-	notInTown 0
-	timeout 0
-	disabled 0
-	inInventory
-	manualAI 0
-}
-#useSelf_skill Heal {
-	lvl
-	maxCastTime 0
-	minCastTime 0
-	hp 
 	sp
 	homunculus_hp
 	homunculus_sp
@@ -622,34 +531,6 @@ doCommand {
 	onAction
 	whenStatusActive
 	whenStatusInactive
-	whenFollowing
-	spirit
-	amuletType
-	aggressives
-	monsters
-	notMonsters
-	monstersCount
-	stopWhenHit 0
-	inLockOnly 0
-	notWhileSitting 0
-	notInTown 0
-	timeout 0
-	disabled 0
-	inInventory
-	manualAI 0
-}
-#useSelf_skill Magnificat {
-	lvl 5
-	maxCastTime 0
-	minCastTime 0
-	hp
-	sp > 5%
-	homunculus_hp
-	homunculus_sp
-	homunculus_dead
-	onAction
-	whenStatusActive
-	whenStatusInactive Magnificat
 	whenFollowing
 	spirit
 	amuletType
@@ -745,8 +626,8 @@ equipAuto {
 	rightHand
 	leftAccessory
 	rightAccessory
-	robe Undershirt
-	armor Pantie
+	robe
+	armor
 	shoes
 	arrow
 	monsters
@@ -775,20 +656,7 @@ equipAuto {
 	inInventory
 	manualAI 0
 }
-useSelf_item Concentration Potion {
-	whenStatusInactive Concentration Potion
-	inLockOnly 1
-	timeout 5
-}
-useSelf_item Grape,Honey,Strawberry {
-	sp < 20%
-}
 
-}
-useSelf_item Novice Potion,Red Potion, Orange Potion, Yellow Potion, White Potion {
-	hp < 50%
-	timeout 0.5
-}
 useSelf_item {
 	hp
 	sp
@@ -809,7 +677,7 @@ useSelf_item {
 	inLockOnly 0
 	notWhileSitting 0
 	notInTown 0
-	timeout 0
+	timeout
 	disabled 0
 	inInventory
 	manualAI 0
@@ -837,7 +705,7 @@ storageAuto 0
 storageAuto_npc
 storageAuto_distance 5
 storageAuto_npc_type 1
-storageAuto_npc_steps c r1 n
+storageAuto_npc_steps
 storageAuto_password
 storageEncryptKey
 storageAuto_keepOpen 0
@@ -848,25 +716,10 @@ minStorageZeny 50
 
 npcTimeResponse
 
-#getAuto Red Potion {
-minAmount 0
-maxAmount 3
-passive
-}
-#getAuto Concentration Potion {
-minAmount 0
-maxAmount 3
-passive
-}
-#getAuto Fly Wing {
-minAmount 0
-maxAmount 3
-passive
-}
-#getAuto Butterfly Wing {
-minAmount 0
-maxAmount 3
-passive
+getAuto {
+	minAmount
+	maxAmount
+	passive
 }
 
 ######## Debugging options; only useful for developers ########
@@ -885,10 +738,4 @@ logToFile_Errors
 logToFile_Messages
 logToFile_Warnings
 history_max 50
-
-macro_readmanual red/chili
-macro_nowarn 1
-macro_orphans terminate
-macro_debug 2
-macro_file macro.txt
 macro_orphans terminate

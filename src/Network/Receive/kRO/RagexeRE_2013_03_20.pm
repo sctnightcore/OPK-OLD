@@ -38,6 +38,7 @@ sub new {
 		'0995' => ['storage_items_stackable', 'v Z24 a*', [qw(len title itemInfo)]],#-1
 		'0996' => ['storage_items_nonstackable', 'v Z24 a*', [qw(len title itemInfo)]],#-1
 		'099D' => ['received_characters', 'v a*', [qw(len charInfo)]],#-1
+		'08C8' => ['changeToInGameState'],
 	);
 	
 	foreach my $switch (keys %packets) {
@@ -120,6 +121,7 @@ sub equip_item {
 					next if $_ == 10; # work around Arrow bug
 					next if $_ == 32768;
 					$char->{equipment}{$equipSlot_lut{$_}} = $item;
+					Plugins::callHook('equipped_item', {slot => $equipSlot_lut{$_}, item => $item});
 				}
 			}
 		}

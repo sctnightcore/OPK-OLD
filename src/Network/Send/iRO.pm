@@ -47,6 +47,8 @@ sub new {
 	);
 	$self->{packet_lut}{$_} = $handlers{$_} for keys %handlers;
 
+	$self->{char_create_version} = 0x0A39;
+
 	$self->{sell_mode} = 0;
 	
 	return $self;
@@ -74,11 +76,39 @@ sub reconstruct_char_delete2_accept {
 	debug "Sent sendCharDelete2Accept. CharID: $args->{CharID}, Code: $args->{code}, Length: $args->{length}\n", "sendPacket", 2;
 }
 
+sub sendCharCreate {
+	my ( $self, $slot, $name, $hair_style, $hair_color, $job_id, $sex ) = @_;
+
+	$hair_color ||= 1;
+	$hair_style ||= 0;
+	$job_id     ||= 0;    # novice
+	$sex        ||= 0;    # female
+
+	my $msg = pack 'v a24 CvvvvC', 0x0A39, stringToBytes( $name ), $slot, $hair_color, $hair_style, $job_id, 0, $sex;
+	$self->sendToServer( $msg );
+}
+
 #sub sendCharDelete {
 #	my ($self, $charID, $email) = @_;
 #	my $msg = pack("C*", 0xFB, 0x01) .
 #			$charID . pack("a50", stringToBytes($email));
 #	$self->sendToServer($msg);
 #}
+
+sub sendTop10Alchemist {
+	shift->sendToServer( pack 'vv', 0x097C, 1 );
+}
+
+sub sendTop10Blacksmith {
+	shift->sendToServer( pack 'vv', 0x097C, 0 );
+}
+
+sub sendTop10PK {
+	shift->sendToServer( pack 'vv', 0x097C, 3 );
+}
+
+sub sendTop10Taekwon {
+	shift->sendToServer( pack 'vv', 0x097C, 2 );
+}
 
 1;

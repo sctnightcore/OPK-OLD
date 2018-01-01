@@ -46,9 +46,8 @@ sub new {
 		'0068' => ['char_delete'], # TODO
 		'0072' => ['map_login', 'a4 a4 a4 V C', [qw(accountID charID sessionID tick sex)]],
 		'007D' => ['map_loaded'], # len 2
-		#'007E' => ['sync', 'V', [qw(time)]],
-        '0360' => ['sync', 'V', [qw(time)]],
-		'0095' => ['character_move', 'a3', [qw(coords)]],
+		'007E' => ['sync', 'V', [qw(time)]],
+		'0085' => ['character_move', 'a3', [qw(coords)]],
 		'0089' => ['actor_action', 'a4 C', [qw(targetID type)]],
 		'008C' => ['public_chat', 'x2 Z*', [qw(message)]],
 		'0090' => ['npc_talk', 'a4 C', [qw(ID type)]],
@@ -57,10 +56,12 @@ sub new {
 		'009B' => ['actor_look_at', 'v C', [qw(head body)]],
 		'009F' => ['item_take', 'a4', [qw(ID)]],
 		'00A2' => ['item_drop', 'v2', [qw(index amount)]],
+		'00A7' => ['item_use', 'v a4', [qw(index targetID)]],#8
 		'00A9' => ['send_equip', 'v2', [qw(index type)]],#6
 		'00B2' => ['restart', 'C', [qw(type)]],
 		'00B8' => ['npc_talk_response', 'a4 C', [qw(ID response)]],
 		'00B9' => ['npc_talk_continue', 'a4', [qw(ID)]],
+		'00BB' => ['sendAddStatusPoint'],
 		#'00F3' => ['map_login', '', [qw()]],
 		'00F3' => ['storage_item_add', 'v V', [qw(index amount)]],
 		'00F5' => ['storage_item_remove', 'v V', [qw(index amount)]],
@@ -77,7 +78,7 @@ sub new {
 		'0151' => ['guild_emblem_request', 'a4', [qw(guildID)]],
 		'017E' => ['guild_chat', 'x2 Z*', [qw(message)]],
 		'0187' => ['ban_check', 'a4', [qw(accountID)]],
-		#'018A' => ['quit_request', 'v', [qw(type)]],
+		'018A' => ['quit_request', 'v', [qw(type)]],
 		'0193' => ['actor_name_request', 'a4', [qw(ID)]],
 		'01B2' => ['shop_open'], # TODO
 		'012E' => ['shop_close'], # len 2
@@ -99,7 +100,9 @@ sub new {
 		'02C4' => ['party_join_request_by_name', 'Z24', [qw(partyName)]],
 		'02D6' => ['view_player_equip_request', 'a4', [qw(ID)]],
 		'02D8' => ['equip_window_tick', 'V2', [qw(type value)]],
+		'02F1' => ['notify_progress_bar_complete'],
 		'035F' => ['character_move', 'a3', [qw(coords)]],
+		'0360' => ['sync', 'V', [qw(time)]],
 		'0361' => ['actor_look_at', 'v C', [qw(head body)]],
 		'0362' => ['item_take', 'a4', [qw(ID)]],
 		'0363' => ['item_drop', 'v2', [qw(index amount)]],
@@ -110,7 +113,6 @@ sub new {
 		'0369' => ['actor_name_request', 'a4', [qw(ID)]],
 		'0436' => ['map_login', 'a4 a4 a4 V C', [qw(accountID charID sessionID tick sex)]],
 		'0437' => ['character_move','a3', [qw(coords)]],
-		'0438' => ['skill_use', 'v2 a4', [qw(lv skillID targetID)]],
 		'0443' => ['skill_select', 'V v', [qw(why skillID)]],
 		'07D7' => ['party_setting', 'V C2', [qw(exp itemPickup itemDivision)]],
 		'0801' => ['buy_bulk_vender', 'x2 a4 a4 a*', [qw(venderID venderCID itemInfo)]], #Selling store
@@ -135,8 +137,6 @@ sub new {
 		'0998' => ['send_equip', 'v V', [qw(index type)]],#8
 		'09A1' => ['sync_received_characters'],
 		'09D0' => ['gameguard_reply'],
-#		'0A76' => ['master_login', 'V Z24 a50 C C', [qw(version username password_salted_md5 master_version clientInfo)]],
-		'0A76' => ['master_login', 'V Z24 a50 C C', [qw(version username password_md5_hex master_version clientInfo)]],
 		#'08BE' => ['change_pin_password','a*', [qw(accountID oldPin newPin)]], # TODO: PIN change system/command?
 	);
 	$self->{packet_list}{$_} = $packets{$_} for keys %packets;

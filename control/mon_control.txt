@@ -56,7 +56,8 @@
 #
 # Monsters not found in this file, or flags not specified will default to:
 # <attack> = 1
-all 1 0 0
+
+
 ##### Eggs #####
 Ant's Egg 0 0 0
 PecoPeco's Egg 0 0 0
@@ -189,6 +190,3 @@ Tao Gunka 0 1 0
 Thanatos 0 1 0
 Turtle General 0 1 0
 Vesper 0 1 0
-
-
-

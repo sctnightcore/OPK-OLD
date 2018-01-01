@@ -206,10 +206,7 @@ sub unknownMessage {
 		debug TF("Packet Tokenizer: Unknown outgoing switch: %s\n", $args->{switch}), 'outgoing';
 		visualDump($args->{RAW_MSG}, "<< Outgoing unknown packet") if $config{debugPacket_unparsed};
 	}
-	if ($args->{switch} ne '0A76')
-{
-   Globals::UnknowSend ($args->{switch},length($args->{RAW_MSG}));
-}
+	
 	# Pass it along to the server, whatever it is
 }
 

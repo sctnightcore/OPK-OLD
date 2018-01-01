@@ -313,8 +313,7 @@ sub checkProxy {
 			Proto		=> 'tcp',
 			ReuseAddr   => 1);
 		die "Unable to start the X-Kore proxy ($ip:$port): $@\n" . 
-			"You can only run one X-Kore session at the same time.\n" .
-			"And make sure no other servers are running on port $port." unless $self->{proxy_listen};
+			"Make sure no other servers are running on port $port." unless $self->{proxy_listen};
 
 		# setup master server if necessary
 		getMainServer();
@@ -429,18 +428,15 @@ sub modifyPacketIn {
 		}
 	}
 
-	if ($switch eq "0069" || $switch eq "0276") {# 
+	if ($switch eq "0069") {
 		use bytes; no encoding 'utf8';
 
 		# queue the packet as requiring client's response in time
 		$self->{packetPending} = $msg;
 		
 		# Modify the server config'ed on Kore to point to proxy
-#		my $accountInfo = substr($msg, 0, 115);
-#		my $serverInfo = substr($msg, 115, length($msg));
-		message T("Config Server ==========>".$config{'XKore_3_gameServer'}."\n");
-		my $accountInfo = ($switch eq "0276") ? substr($msg, 0, 51 + (32*$config{'XKore_3_gameServer'})) : substr($msg, 0, 47);
-		my $serverInfo = ($switch eq "0276") ? substr($msg, 51 + (32*$config{'XKore_3_gameServer'}), length($msg)) : substr($msg, 47, length($msg));
+		my $accountInfo = substr($msg, 0, 47);
+		my $serverInfo = substr($msg, 47, length($msg));
 		my $newServers = '';
 		my $serverCount = 0;
 		
